@@ -64,7 +64,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, headerData }) => {
                         </svg>
                     </div>
                     <div className="variacao-diaria">
-                        <p>Variação Diária</p>
+                        <p>Variação em Tempo Real</p>
                         <h3 className={variationClass}>
                           {variationText}
                         </h3>

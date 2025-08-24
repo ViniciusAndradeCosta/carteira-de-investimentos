@@ -6,7 +6,7 @@ const api = axios.create({
 
 // Tipos...
 export interface Investment {
-  id: number;
+  id: string; // Alterado de number para string
   type: 'ACAO' | 'CRIPTO' | 'FUNDO' | 'RENDA_FIXA' | 'OUTRO';
   symbol: string;
   quantity: number;
@@ -22,7 +22,6 @@ export interface Summary {
   assetCount: number;
 }
 
-// 🔹 NOVA INTERFACE PARA EVOLUÇÃO
 export interface EvolutionData {
   date: string;
   totalValue: number;
@@ -38,12 +37,8 @@ export const getSummary = (): Promise<Summary> =>
 export const createInvestment = (data: NewInvestmentData): Promise<Investment> =>
   api.post('/investments', data).then(response => response.data);
 
-export const updateInvestment = (id: number, data: NewInvestmentData): Promise<Investment> =>
+export const updateInvestment = (id: string, data: NewInvestmentData): Promise<Investment> => // Alterado para string
   api.put(`/investments/${id}`, data).then(response => response.data);
 
-export const deleteInvestment = (id: number): Promise<void> =>
+export const deleteInvestment = (id: string): Promise<void> => // Alterado para string
   api.delete(`/investments/${id}`).then(response => response.data);
-
-// 🔹 CORREÇÃO: Endpoint para buscar dados de histórico
-export const getPortfolioEvolution = (): Promise<EvolutionData[]> =>
-  api.get('/investments/history').then(response => response.data);

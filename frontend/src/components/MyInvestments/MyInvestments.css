@@ -236,3 +236,39 @@
 .menu-dropdown .delete-button:hover .delete-icon {
     stroke: #fff; /* Cor branca ao passar o mouse */
 }
+
+.item-profit.positive {
+    color: #2da44e; /* Verde para lucro */
+}
+
+.item-profit.negative {
+    color: #cf222e; /* Vermelho para prejuízo */
+}
+
+.item-profit .percentage.positive {
+    background-color: rgba(45, 164, 78, 0.2);
+    color: #2da44e;
+}
+
+.item-profit .percentage.negative {
+    background-color: rgba(207, 34, 46, 0.2);
+    color: #cf222e;
+}
+
+.icon-bg-blue { background-color: #0969da; }
+.icon-bg-green { background-color: #238636; }
+.icon-bg-red { background-color: #cf222e; } /* Adicione esta linha */
+
+
+.item-profit.positive {
+    color: #2da44e; /* Verde para lucro */
+}
+.summary-card-icon.icon-bg-red {
+    background-color: #cf222e; /* Vermelho */
+}
+
+.item-profit.negative,
+.percentage.negative,
+h3.negative {
+    color: #cf222e; /* Vermelho */
+}

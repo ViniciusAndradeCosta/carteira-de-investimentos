@@ -41,7 +41,7 @@
     width: 48px;
     height: 48px;
     border-radius: 8px;
-    background-color: #0969da;
+    background-color: #a371f7;
     color: white;
     display: flex;
     align-items: center;
@@ -93,4 +93,4 @@
 .user-details { text-align: right; }
 .user-details span { font-weight: bold; }
 .user-details p { margin: 0; font-size: 0.8rem; color: #8d96a0; }
-.user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #0969da; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+.user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #a371f7; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
