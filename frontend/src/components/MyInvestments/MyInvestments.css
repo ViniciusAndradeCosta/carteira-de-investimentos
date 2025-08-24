@@ -186,3 +186,53 @@
 .item-profit { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
 .item-profit .percentage { background-color: #238636; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 500; }
 .item-menu { color: #8d96a0; font-weight: bold; cursor: pointer; font-size: 1.2rem; padding-left: 1rem; }
+
+/* ===== Dropdown do menu de cada card ===== */
+.item-menu {
+    position: relative;
+    color: #8d96a0;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding-left: 1rem;
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    min-width: 140px;
+}
+
+.menu-dropdown button {
+    background: none;
+    border: none;
+    color: #e6edf3;
+    text-align: left;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-dropdown button:hover {
+    background-color: #30363d;
+}
+
+/* Estiliza o botão de excluir e o ícone */
+.menu-dropdown .delete-button .delete-icon {
+    stroke: #ff4d4f; /* Cor vermelha para o ícone */
+}
+
+.menu-dropdown .delete-button:hover .delete-icon {
+    stroke: #fff; /* Cor branca ao passar o mouse */
+}

@@ -50,18 +50,24 @@ body {
     color: #ffffff;
     flex-shrink: 0;
 }
-.symbol-box { border-radius: 8px; }
-.symbol-circle { border-radius: 50%; }
+.symbol-box { 
+  border-radius: 8px; 
+}
 
-.symbol-color-acao { background-color: #2f81f7; }
+.symbol-circle { 
+  border-radius: 50%; 
+}
+
+.symbol-color-acao { 
+  background-color: #2f81f7; 
+}
 .symbol-color-cripto { background-color: #f7b731; }
 .symbol-color-fundo { background-color: #a371f7; }
 .symbol-color-renda-fixa { background-color: #2da44e; }
-.symbol-color-outro { background-color: #6e7681; }
+
 
 .tag { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 12px; color: #ffffff; font-weight: 500; text-transform: capitalize; }
 .tag-acao { background-color: #2f81f7; }
 .tag-cripto { background-color: #f7b731; }
 .tag-fundo { background-color: #a371f7; }
 .tag-renda-fixa { background-color: #2da44e; }
-.tag-outro { background-color: #6e7681; }

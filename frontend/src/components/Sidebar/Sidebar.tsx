@@ -11,7 +11,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setCurrentView }) => {
     <aside className="sidebar">
         <div className="sidebar-header">
             <div className="logo-icon">$</div>
-            <span className="nav-text">Sua Carteira</span>
+            <span className="nav-text">Investment Portfolio</span>
         </div>
         <nav className="sidebar-nav">
           <ul>
