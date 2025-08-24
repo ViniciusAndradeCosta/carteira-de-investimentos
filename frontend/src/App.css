@@ -1,42 +1,67 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  overflow: hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-container {
+  display: flex;
+  height: 100vh;
+  background-color: #010409;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 1rem 1.5rem 0 1.5rem;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.main-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
-.card {
-  padding: 2em;
+.app-container.sidebar-collapsed .sidebar {
+  width: 80px;
+}
+.app-container.sidebar-collapsed .nav-text {
+  display: none;
+}
+.app-container.sidebar-collapsed .sidebar-header {
+  justify-content: center;
+}
+.app-container.sidebar-collapsed .sidebar-nav li {
+  justify-content: center;
 }
 
-.read-the-docs {
-  color: #888;
+.positive { color: #2da44e; }
+.negative { color: #cf222e; }
+
+.symbol-box, .symbol-circle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    flex-shrink: 0;
 }
+.symbol-box { border-radius: 8px; }
+.symbol-circle { border-radius: 50%; }
+
+.symbol-color-acao { background-color: #2f81f7; }
+.symbol-color-cripto { background-color: #f7b731; }
+.symbol-color-fundo { background-color: #a371f7; }
+.symbol-color-renda-fixa { background-color: #2da44e; }
+.symbol-color-outro { background-color: #6e7681; }
+
+.tag { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 12px; color: #ffffff; font-weight: 500; text-transform: capitalize; }
+.tag-acao { background-color: #2f81f7; }
+.tag-cripto { background-color: #f7b731; }
+.tag-fundo { background-color: #a371f7; }
+.tag-renda-fixa { background-color: #2da44e; }
+.tag-outro { background-color: #6e7681; }

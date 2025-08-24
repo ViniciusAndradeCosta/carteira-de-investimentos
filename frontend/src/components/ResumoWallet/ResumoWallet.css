@@ -1,0 +1,188 @@
+.resumo-wallet-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ESTILOS PARA O CABEÇALHO EXATO DO MODELO */
+.main-header-exact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #161b22;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #21262d;
+    flex-shrink: 0;
+}
+
+.header-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-header-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: white;
+    color: #010409;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.main-header-exact p {
+    margin: 0 0 0.5rem 0;
+    color: #8d96a0;
+    font-size: 0.9rem;
+}
+
+.main-header-exact h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.variacao-diaria-pill {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #21262d;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+}
+
+.variacao-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+}
+
+.positive-bg {
+    background-color: #238636;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.user-details { text-align: right; }
+.user-details span { font-weight: bold; }
+.user-details p { margin: 0; font-size: 0.8rem; }
+.user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #0969da; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+
+/* Cards de Resumo de Ativos */
+.asset-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.asset-card { background-color: #161b22; padding: 1.5rem; border-radius: 8px; border: 1px solid #21262d; }
+.asset-card p { margin: 0 0 0.5rem 0; color: #8d96a0; }
+.asset-card h4 { margin: 0 0 0.75rem 0; font-size: 1.5rem; }
+.asset-variation { font-size: 0.9rem; font-weight: 500; }
+
+/* LAYOUT PRINCIPAL */
+.resumo-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.top-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dividido meio a meio */
+    gap: 1.5rem;
+}
+
+.card-grafico, .card-recentes {
+    background-color: #161b22;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #21262d;
+    display: flex;
+    flex-direction: column;
+}
+.card-evolucao {
+    flex-grow: 1;
+}
+.card-grafico h5, .card-recentes h5 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    color: #e6edf3;
+    border-bottom: 1px solid #21262d;
+}
+.grafico-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    color: #484f58;
+    border-radius: 6px;
+    flex-grow: 1;
+}
+
+/* Investimentos Recentes */
+.card-recentes ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.card-recentes li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.card-recentes li:not(:last-child) { margin-bottom: 1.5rem; }
+.info-principal { display: flex; align-items: center; gap: 1rem; }
+.symbol-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+.investment-info span { font-weight: bold; display: block; }
+.investment-info p { margin: 0.25rem 0 0 0; color: #8d96a0; font-size: 0.85rem; }
+
+.recent-values { text-align: right; }
+.investment-amount { font-weight: bold; display: block; margin-bottom: 0.25rem; }
+.recent-variation { font-size: 0.85rem; color: #8d96a0; }
+.recent-variation.positive { color: #2da44e; }
+.recent-variation.negative { color: #cf222e; }
+
+.grafico-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #484f58;
+    border-radius: 6px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Adicione esta nova classe para o container do gráfico */
+.chart-wrapper {
+    position: relative;
+    margin: auto;
+    height: 90%; /* Ajuste a altura conforme necessário */
+    width: 90%;
+}

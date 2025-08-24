@@ -1,0 +1,188 @@
+.my-investments-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+}
+
+.page-header h1 { margin: 0 0 0.25rem 0; font-size: 1.75rem; }
+.page-header p { margin: 0; color: #8d96a0; }
+
+.btn-novo-investimento { background-color: #a371f7; color: white; border: none; padding: 0.7rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.9rem; }
+
+/* ... estilos dos cards de resumo ... */
+
+.filters-search-card { background-color: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; flex-shrink: 0; }
+.filters-search-card h4 { margin: 0 0 1rem 0; }
+.filters-content { display: flex; gap: 1rem; align-items: center; }
+.search-wrapper { position: relative; flex-grow: 1; }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.search-input { width: 100%; padding: 0.8rem 0.8rem 0.8rem 40px; background-color: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: white; font-size: 1rem; box-sizing: border-box; }
+.search-input:focus { outline: none; border-color: #0969da; }
+
+/* Wrapper para o botão de filtro e dropdown */
+.filter-wrapper {
+    position: relative;
+}
+
+.btn-filter { display: flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1rem; background-color: #21262d; border: 1px solid #30363d; color: #e6edf3; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+
+/* Estilos do Dropdown de Filtro */
+.filter-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    width: 200px;
+    z-index: 10;
+}
+.filter-dropdown li {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.filter-dropdown li:hover {
+    background-color: #0969da;
+    color: white;
+}
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-shrink: 0;
+}
+
+.summary-cards .card {
+    background-color: #161b22;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #21262d;
+    position: relative;
+}
+.summary-cards .card p { margin: 0 0 0.5rem 0; color: #8d96a0; }
+.summary-cards .card h3 { margin: 0; font-size: 1.5rem; }
+
+/* ===== CORREÇÃO AQUI ===== */
+.summary-card-icon {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* opacity: 0.3; <-- ESTA LINHA FOI REMOVIDA */
+}
+/* ======================== */
+
+.icon-bg-blue { background-color: #0969da; }
+.icon-bg-green { background-color: #238636; }
+
+
+.filters-search-card {
+    background-color: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+}
+
+.filters-search-card h4 {
+    margin: 0 0 1rem 0;
+}
+
+.filters-content {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.8rem 0.8rem 0.8rem 40px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+.search-input:focus { outline: none; border-color: #0969da; }
+
+.btn-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    background-color: #21262d;
+    border: 1px solid #30363d;
+    color: #e6edf3;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.investment-list-container {
+    background-color: #161b22;
+    border-radius: 8px;
+    border: 1px solid #21262d;
+    padding: 1.5rem;
+    flex-grow: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-title { margin: 0 0 1.5rem 0; font-size: 1.1rem; color: #e6edf3; }
+
+.investment-list-scrollable {
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 10px;
+}
+.investment-list-scrollable::-webkit-scrollbar { width: 8px; }
+.investment-list-scrollable::-webkit-scrollbar-track { background: #161b22; }
+.investment-list-scrollable::-webkit-scrollbar-thumb { background-color: #30363d; border-radius: 4px; }
+.investment-list-scrollable::-webkit-scrollbar-thumb:hover { background-color: #484f58; }
+
+
+.investment-item-card { display: grid; grid-template-columns: 2fr 1fr auto; align-items: center; gap: 1rem; background-color: #0d1117; border: 1px solid #21262d; padding: 1.2rem 1.5rem; border-radius: 8px; margin-bottom: 1rem; }
+.item-info { display: flex; align-items: center; gap: 1rem; }
+.item-details .symbol { font-weight: bold; font-size: 1.1rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem; }
+.item-details .details-text { color: #8d96a0; font-size: 0.85rem; }
+.item-values { text-align: right; }
+.item-values h4 { margin: 0 0 0.25rem 0; font-size: 1.25rem; font-weight: bold; }
+.item-profit { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; font-size: 0.85rem; }
+.item-profit .percentage { background-color: #238636; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 500; }
+.item-menu { color: #8d96a0; font-weight: bold; cursor: pointer; font-size: 1.2rem; padding-left: 1rem; }
