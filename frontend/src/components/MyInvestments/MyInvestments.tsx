@@ -1,37 +1,24 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { getInvestments, type Investment, deleteInvestment } from '../../services/api';
+import { deleteInvestment, type Investment } from '../../services/api';
 import AddNewInvestmentModal from '../Form/AddNewInvestmentModal';
 import './MyInvestments.css';
 
 interface MyInvestmentsProps {
     showToast: (message: string, type: 'success' | 'error') => void;
+    onInvestmentsChange: () => void;
+    investments: Investment[];
+    loading: boolean;
+    setPatrimonioTotal: React.Dispatch<React.SetStateAction<number>>; // ➡️ Corrigido o tipo para refletir a função do useState
 }
 
-const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
-    const [investments, setInvestments] = useState<Investment[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast, onInvestmentsChange, investments, loading, setPatrimonioTotal }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [selectedType, setSelectedType] = useState<string>('ALL');
     const [searchQuery, setSearchQuery] = useState('');
     const filterRef = useRef<HTMLDivElement>(null);
 
-    const [editingInvestment, setEditingInvestment] = useState<Investment | null>(null);
-
     const [openMenuId, setOpenMenuId] = useState<number | null>(null);
-
-    const fetchInvestments = async () => {
-        try {
-            setLoading(true);
-            const data = await getInvestments();
-            setInvestments(data);
-        } catch (err) {
-            setError('Falha ao buscar investimentos.');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -46,15 +33,31 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
         return () => { document.removeEventListener("mousedown", handleClickOutside); };
     }, []);
 
-    useEffect(() => {
-        fetchInvestments();
-    }, []);
-
-    const handleInvestmentSaved = (savedInvestment: Investment) => {
-        setInvestments(prevInvestments => [
-            savedInvestment,
-            ...prevInvestments.filter(inv => inv.id !== savedInvestment.id),
-        ]);
+    const handleInvestmentSaved = (_savedInvestment: Investment) => {
+        setPatrimonioTotal(prev => prev - (_savedInvestment.purchasePrice * _savedInvestment.quantity));
+        showToast("Investimento adicionado com sucesso!", "success");
+        onInvestmentsChange();
+    };
+    
+    const handleSell = async (investment: Investment) => {
+        try {
+            const profit = calculateProfit(investment.purchasePrice, investment.quantity, investment.purchasePrice);
+            const totalCurrentValue = (investment.purchasePrice * investment.quantity) + profit;
+            
+            setPatrimonioTotal(prev => prev + totalCurrentValue);
+            
+            await deleteInvestment(investment.id);
+            showToast("Venda concluída com sucesso!", "success");
+            onInvestmentsChange();
+        } catch (err) {
+            showToast("Falha ao vender o investimento. Verifique a sua API.", "error");
+            console.error("Erro ao vender investimento:", err);
+        }
+        setOpenMenuId(null);
+    };
+    
+    const openAddNewInvestmentModal = () => {
+        setIsModalOpen(true);
     };
 
     const displayedInvestments = useMemo(() => {
@@ -73,30 +76,28 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
     const formatCurrency = (value: number) => {
         return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
     };
-
-    const handleEditClick = (investment: Investment) => {
-        setEditingInvestment(investment);
-        setIsModalOpen(true);
-        setOpenMenuId(null);
+    
+    const calculateProfit = (purchasePrice: number, quantity: number, currentPrice: number) => {
+        const totalInvested = purchasePrice * quantity;
+        const totalCurrentValue = currentPrice * quantity;
+        return totalCurrentValue - totalInvested;
     };
+    
+    const calculateProfitability = (profit: number, totalInvested: number) => {
+        return totalInvested > 0 ? (profit / totalInvested) * 100 : 0;
+    }
+    
+    const profitsAndLosses = useMemo(() => {
+        return displayedInvestments.map(inv => calculateProfit(inv.purchasePrice, inv.quantity, inv.purchasePrice));
+    }, [displayedInvestments]);
+    
+    const totalInvested = useMemo(() => displayedInvestments.reduce((acc, inv) => acc + (inv.purchasePrice * inv.quantity), 0), [displayedInvestments]);
+    const totalProfit = useMemo(() => profitsAndLosses.reduce((acc, profit) => acc + profit, 0), [profitsAndLosses]);
+    const totalProfitability = useMemo(() => calculateProfitability(totalProfit, totalInvested), [totalProfit, totalInvested]);
 
-    const handleDelete = async (id: number) => {
-        try {
-            // Tenta excluir no backend
-            await deleteInvestment(id);
-            // Se a exclusão for bem sucedida, atualiza o estado local
-            setInvestments(prev => prev.filter(inv => inv.id !== id));
-            showToast("Investimento removido com sucesso!", "success");
-        } catch (err) {
-            showToast("Falha ao remover o investimento. Verifique a sua API.", "error");
-            console.error("Erro ao remover investimento:", err);
-        }
-    };
 
     if (loading) return <div className="loading-message">Carregando...</div>;
-    if (error) return <div className="error-message">{error}</div>;
 
-    const totalValue = investments.reduce((acc, inv) => acc + (inv.purchasePrice * inv.quantity), 0);
     const totalAssets = investments.length;
     const assetTypes = { 'ALL': 'Todos os tipos', 'ACAO': 'Ações', 'CRIPTO': 'Criptomoedas', 'FUNDO': 'Fundos', 'RENDA_FIXA': 'Renda Fixa' };
 
@@ -106,11 +107,9 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                 <AddNewInvestmentModal
                     onClose={() => {
                         setIsModalOpen(false);
-                        setEditingInvestment(null);
                     }}
                     onInvestmentAdded={handleInvestmentSaved}
                     showToast={showToast}
-                    investmentToEdit={editingInvestment}
                 />
             )}
 
@@ -120,10 +119,7 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                         <h1>Meus Investimentos</h1>
                         <p>Gerencie e acompanhe seus ativos</p>
                     </div>
-                    <button className="btn-novo-investimento" onClick={() => {
-                        setEditingInvestment(null);
-                        setIsModalOpen(true);
-                    }}>
+                    <button className="btn-novo-investimento" onClick={openAddNewInvestmentModal}>
                         + Novo Investimento
                     </button>
                 </div>
@@ -139,7 +135,7 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                             </svg>
                         </div>
                         <p>Valor Total</p>
-                        <h3>{formatCurrency(totalValue)}</h3>
+                        <h3 className={totalProfit >= 0 ? 'positive' : 'negative'}>{formatCurrency(totalInvested + totalProfit)}</h3>
                     </div>
                     <div className="card">
                         <div className="summary-card-icon icon-bg-green">
@@ -151,7 +147,7 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                             </svg>
                         </div>
                         <p>Lucro/Prejuízo</p>
-                        <h3 className="positive">+ R$ 25.752,00</h3>
+                        <h3 className={totalProfit >= 0 ? 'positive' : 'negative'}>{totalProfit >= 0 ? '+' : ''}{formatCurrency(totalProfit)}</h3>
                     </div>
                     <div className="card">
                         <div className="summary-card-icon icon-bg-green">
@@ -163,7 +159,7 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                             </svg>
                         </div>
                         <p>Rentabilidade</p>
-                        <h3 className="positive">+15.51%</h3>
+                        <h3 className={totalProfitability >= 0 ? 'positive' : 'negative'}>{totalProfitability >= 0 ? '+' : ''}{totalProfitability.toFixed(2)}%</h3>
                     </div>
                     <div className="card">
                         <p>Ativos</p>
@@ -175,7 +171,7 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                     <h4>Filtros e Busca</h4>
                     <div className="filters-content">
                         <div className="search-wrapper">
-                            <svg className="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="11" cy="11" r="8"></circle>
@@ -214,7 +210,12 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                 <div className="investment-list-container">
                     <h4 className="list-title">Lista de Investimentos</h4>
                     <div className="investment-list-scrollable">
-                        {displayedInvestments.map((investment, index) => (
+                        {displayedInvestments.map((investment, index) => {
+                            const totalInvestedSingle = investment.purchasePrice * investment.quantity;
+                            const profit = profitsAndLosses[index];
+                            const profitability = calculateProfitability(profit, totalInvestedSingle);
+                            const currentValue = totalInvestedSingle + profit;
+                            return (
                             <div className="investment-item-card" key={`${investment.id}-${index}`}>
                                 <div className="item-info">
                                     <span className={`symbol-box symbol-color-${investment.type.toLowerCase().replace('_', '-')}`}>
@@ -233,36 +234,28 @@ const MyInvestments: React.FC<MyInvestmentsProps> = ({ showToast }) => {
                                     </div>
                                 </div>
                                 <div className="item-values">
-                                    <h4>{formatCurrency(investment.purchasePrice * investment.quantity)}</h4>
-                                    <div className="item-profit positive">
-                                        <span>+ R$ 482,00</span>
-                                        <span className='percentage'>+24.52%</span>
+                                    <h4>{formatCurrency(currentValue)}</h4>
+                                    <div className={`item-profit ${profit >= 0 ? 'positive' : 'negative'}`}>
+                                        <span>{profit >= 0 ? '+' : ''}{formatCurrency(profit)}</span>
+                                        <span className='percentage'>{`${profitability >= 0 ? '+' : ''}${profitability.toFixed(2)}%`}</span>
                                     </div>
                                 </div>
 
-                                {/* 🔹 Menu de opções */}
                                 <div className="item-menu">
                                     <span onClick={() => setOpenMenuId(openMenuId === investment.id ? null : investment.id)}>⋮</span>
                                     {openMenuId === investment.id && (
                                         <div className="menu-dropdown">
-                                            <button onClick={() => handleEditClick(investment)} className="edit-button">
+                                            <button onClick={() => handleSell(investment)} className="sell-button">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                                    <path d="M21 12.79A9 9 0 1 1 11.21 3M21 12.79V19M21 12.79H19M19 12.79V5"></path>
                                                 </svg>
-                                                <span>Editar</span>
-                                            </button>
-                                            <button onClick={() => handleDelete(investment.id)} className="delete-button">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="delete-icon">
-                                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                </svg>
-                                                <span>Excluir</span>
+                                                <span>Vender</span>
                                             </button>
                                         </div>
                                     )}
                                 </div>
                             </div>
-                        ))}
+                        )})}
                     </div>
                 </div>
             </div>

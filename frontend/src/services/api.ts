@@ -22,6 +22,12 @@ export interface Summary {
   assetCount: number;
 }
 
+// 🔹 NOVA INTERFACE PARA EVOLUÇÃO
+export interface EvolutionData {
+  date: string;
+  totalValue: number;
+}
+
 // Funções da API
 export const getInvestments = (): Promise<Investment[]> =>
   api.get('/investments').then(response => response.data);
@@ -32,10 +38,12 @@ export const getSummary = (): Promise<Summary> =>
 export const createInvestment = (data: NewInvestmentData): Promise<Investment> =>
   api.post('/investments', data).then(response => response.data);
 
-// 🔹 NOVA FUNÇÃO PARA EDIÇÃO
 export const updateInvestment = (id: number, data: NewInvestmentData): Promise<Investment> =>
   api.put(`/investments/${id}`, data).then(response => response.data);
 
-// 🔹 SE PRECISAR EXCLUIR
 export const deleteInvestment = (id: number): Promise<void> =>
   api.delete(`/investments/${id}`).then(response => response.data);
+
+// 🔹 CORREÇÃO: Endpoint para buscar dados de histórico
+export const getPortfolioEvolution = (): Promise<EvolutionData[]> =>
+  api.get('/investments/history').then(response => response.data);

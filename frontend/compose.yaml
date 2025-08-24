@@ -1,0 +1,30 @@
+services:
+  pgsql-investments:
+    image: postgres:16-alpine
+    ports:
+      # HOST:CONTAINER
+      - "5434:5432"
+    environment:
+      - POSTGRES_USER=pgsql-investments-master
+      - POSTGRES_PASSWORD=pgsql-investments-password
+      - POSTGRES_DB=investments
+    volumes:
+      - ./01-create-database-investimentos.sql:/docker-entrypoint-initdb.d/01-create-database-investimentos.sql
+
+    networks:
+      - backend
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    ports:
+      - "8124:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=investments@web.edu.br
+      - PGADMIN_DEFAULT_PASSWORD=123456
+
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:

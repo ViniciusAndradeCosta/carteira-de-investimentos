@@ -188,3 +188,7 @@
 .legend-dot.cripto { background-color: #f7b731; }
 .legend-dot.fundos { background-color: #a371f7; }
 .legend-dot.renda-fixa { background-color: #2da44e; }
+
+.variation-zero {
+    color: #8d96a0; /* Cor cinza, a mesma de outros textos secundários */
+}

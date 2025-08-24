@@ -1,0 +1,71 @@
+# Arquivo para testar os endpoints da API.
+# Use com a extensão "REST Client" no VS Code ou similar.
+
+# Variável base da URL
+@baseUrl = http://localhost:3400
+
+### 1. Cadastrar um novo ativo (Ação)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "BBAS3",
+  "quantity": 100,
+  "purchasePrice": 58.50,
+  "purchaseDate": "2024-05-20"
+}
+
+### 2. Cadastrar um novo ativo (Cripto)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "CRIPTO",
+  "symbol": "BTC",
+  "quantity": 1,
+  "purchasePrice": 350000.00,
+  "purchaseDate": "2024-01-10"
+}
+
+### 3. Cadastrar um novo ativo (Fundo)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "FUNDO",
+  "symbol": "KAPITALO K10",
+  "quantity": 50,
+  "purchasePrice": 105.20,
+  "purchaseDate": "2024-03-15"
+}
+
+
+### 4. Listar todos os ativos da carteira
+GET {{baseUrl}}/investments
+
+### 5. Filtrar ativos por tipo (CRIPTO)
+GET {{baseUrl}}/investments?type=CRIPTO
+
+### 6. Filtrar ativos por tipo (ACAO)
+GET {{baseUrl}}/investments?type=ACAO
+
+### 7. Atualizar um ativo (substitua {id} pelo ID do ativo que deseja atualizar)
+# Ex: http://localhost:8080/investments/1
+PUT {{baseUrl}}/investments/1
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "BBAS3",
+  "quantity": 150,
+  "purchasePrice": 59.00,
+  "purchaseDate": "2024-05-20"
+}
+
+### 8. Remover um ativo da carteira (substitua {id} pelo ID do ativo)
+# Ex: http://localhost:8080/investments/2
+DELETE {{baseUrl}}/investments/2
+
+### 9. Obter o resumo da carteira
+GET {{baseUrl}}/investments/summary
