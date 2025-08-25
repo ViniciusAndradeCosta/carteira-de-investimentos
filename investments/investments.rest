@@ -1,0 +1,287 @@
+# =================================================================
+# Arquivo para testar os endpoints da API de Investimentos.
+# Contém 20 registros de POST com dados variados de 2018 a 2025.
+# Use com a extensão "REST Client" no VS Code ou similar.
+# =================================================================
+
+# Variável base da URL
+@baseUrl = http://localhost:3400
+
+# -----------------------------------------------------------------
+#                     NOVOS REGISTROS (2018 - 2025)
+# -----------------------------------------------------------------
+
+### 1. Cadastrar Ação (Magazine Luiza - 2018)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "MGLU3",
+  "quantity": 500,
+  "purchasePrice": 22.50,
+  "purchaseDate": "2018-09-15"
+}
+
+### 2. Cadastrar Renda Fixa (LCI - 2018)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "RENDA_FIXA",
+  "symbol": "LCI BANCO XP 98% CDI",
+  "quantity": 1,
+  "purchasePrice": 10000.00,
+  "purchaseDate": "2018-11-20"
+}
+
+### 3. Cadastrar Ação (WEG - 2019)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "WEGE3",
+  "quantity": 300,
+  "purchasePrice": 19.80,
+  "purchaseDate": "2019-04-10"
+}
+
+### 4. Cadastrar FII (Logística - 2019)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "FUNDO",
+  "symbol": "HGLG11",
+  "quantity": 50,
+  "purchasePrice": 135.00,
+  "purchaseDate": "2019-07-22"
+}
+
+### 5. Cadastrar Cripto (Bitcoin - 2019)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "CRIPTO",
+  "symbol": "BTC",
+  "quantity": 0.5,
+  "purchasePrice": 38500.00,
+  "purchaseDate": "2019-12-05"
+}
+
+### 6. Cadastrar Ação (Petrobras na baixa - 2020)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "PETR4",
+  "quantity": 1000,
+  "purchasePrice": 16.40,
+  "purchaseDate": "2020-03-25"
+}
+
+### 7. Cadastrar Renda Fixa (Tesouro Selic - 2020)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "RENDA_FIXA",
+  "symbol": "TESOURO SELIC 2025",
+  "quantity": 10,
+  "purchasePrice": 105.70,
+  "purchaseDate": "2020-05-18"
+}
+
+### 8. Cadastrar Cripto (Ethereum - 2020)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "CRIPTO",
+  "symbol": "ETH",
+  "quantity": 3,
+  "purchasePrice": 2800.00,
+  "purchaseDate": "2020-11-12"
+}
+
+### 9. Cadastrar Fundo de Ações (Alaska Black - 2021)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "FUNDO",
+  "symbol": "ALASKA BLACK BDR",
+  "quantity": 80,
+  "purchasePrice": 115.30,
+  "purchaseDate": "2021-02-08"
+}
+
+### 10. Cadastrar Ação (Suzano - 2021)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "SUZB3",
+  "quantity": 150,
+  "purchasePrice": 55.80,
+  "purchaseDate": "2021-10-21"
+}
+
+### 11. Cadastrar Renda Fixa (CDB - 2021)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "RENDA_FIXA",
+  "symbol": "CDB PAGBANK 120% CDI",
+  "quantity": 1,
+  "purchasePrice": 5000.00,
+  "purchaseDate": "2021-09-01"
+}
+
+### 12. Cadastrar Ação (Banco do Brasil - 2022)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "BBAS3",
+  "quantity": 400,
+  "purchasePrice": 35.10,
+  "purchaseDate": "2022-06-17"
+}
+
+### 13. Cadastrar FII (Lajes Corporativas - 2022)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "FUNDO",
+  "symbol": "KNRI11",
+  "quantity": 75,
+  "purchasePrice": 140.20,
+  "purchaseDate": "2022-01-28"
+}
+
+### 14. Cadastrar Cripto (Polygon - 2022)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "CRIPTO",
+  "symbol": "MATIC",
+  "quantity": 2000,
+  "purchasePrice": 4.80,
+  "purchaseDate": "2022-12-30"
+}
+
+### 15. Cadastrar Renda Fixa (Tesouro IPCA+ - 2023)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "RENDA_FIXA",
+  "symbol": "TESOURO IPCA+ 2035",
+  "quantity": 4,
+  "purchasePrice": 2150.00,
+  "purchaseDate": "2023-02-14"
+}
+
+### 16. Cadastrar Ação (Prio - 2023)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "PRIO3",
+  "quantity": 250,
+  "purchasePrice": 42.00,
+  "purchaseDate": "2023-11-25"
+}
+
+### 17. Cadastrar FII (Shoppings - 2023)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "FUNDO",
+  "symbol": "XPML11",
+  "quantity": 120,
+  "purchasePrice": 102.50,
+  "purchaseDate": "2023-07-19"
+}
+
+### 18. Cadastrar Cripto (Solana - 2024)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "CRIPTO",
+  "symbol": "SOL",
+  "quantity": 30,
+  "purchasePrice": 510.00,
+  "purchaseDate": "2024-03-12"
+}
+
+### 19. Cadastrar Ação (Itaú - 2024)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "ITUB4",
+  "quantity": 350,
+  "purchasePrice": 31.90,
+  "purchaseDate": "2024-08-01"
+}
+
+### 20. Cadastrar BDR (NVIDIA - 2025)
+POST {{baseUrl}}/investments
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "NVDC34",
+  "quantity": 100,
+  "purchasePrice": 125.40,
+  "purchaseDate": "2025-02-15"
+}
+
+
+#################################################################
+# -------------------- OUTRAS OPERAÇÕES ----------------------- #
+#################################################################
+
+### Listar todos os ativos da carteira
+GET {{baseUrl}}/investments
+
+### Filtrar ativos por tipo (ex: FUNDO)
+GET {{baseUrl}}/investments?type=FUNDO
+
+### Obter um ativo específico pelo ID (substitua {id} pelo ID real)
+# Ex: http://localhost:3400/investments/1
+GET {{baseUrl}}/investments/1
+
+### Atualizar um ativo (substitua {id} pelo ID do ativo que deseja atualizar)
+# Ex: http://localhost:3400/investments/1
+PUT {{baseUrl}}/investments/1
+Content-Type: application/json
+
+{
+  "type": "ACAO",
+  "symbol": "MGLU3",
+  "quantity": 550,
+  "purchasePrice": 23.10,
+  "purchaseDate": "2018-09-15"
+}
+
+### Remover um ativo da carteira (substitua {id} pelo ID do ativo)
+# Ex: http://localhost:3400/investments/2
+DELETE {{baseUrl}}/investments/2
+
+### Obter o resumo da carteira
+GET {{baseUrl}}/investments/summary
