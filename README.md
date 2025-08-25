@@ -1,7 +1,9 @@
-# 💼 Carteira de Investimentos
+# 📊 Carteira de Investimentos  
 
-Monorepo full-stack para gerenciar uma **carteira pessoal de investimentos**, com backend em **Java/Spring Boot** e frontend em **React + TypeScript**.  
-O objetivo é cadastrar ativos, registrar movimentações (compra/venda/proventos), acompanhar posições, alocação por classe e evolução do patrimônio.
+Este projeto é uma aplicação desenvolvida em **Java com Spring Boot** para gerenciar carteiras de investimentos.  
+Ele permite o controle de ativos, operações e histórico de investimentos de forma simples e eficiente, integrando boas práticas de desenvolvimento e arquitetura.  
+
+⚡ **Importante:** Este projeto foi desenvolvido como parte de um **trabalho prático da disciplina Sistemas Web 2**.  
 
 > Projeto acadêmico/experimental — não constitui recomendação de investimento.
 
